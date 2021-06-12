@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Routes from "./Routes";
+import styled from "styled-components";
+import { ProvideAuth } from "./Hooks/useAuth";
+import { Provider } from "react-redux";
+import { store } from "./Store";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ProvideAuth>
+      <Provider store={store}>
+        <AppContainer className="App">
+          <Routes />
+        </AppContainer>
+      </Provider>
+    </ProvideAuth>
   );
 }
 
 export default App;
+
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
